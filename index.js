@@ -11,25 +11,17 @@ function destructivelyUpdateObjectWithKeyAndValue(object, key, value) {
 }
 
 function deleteFromObjectByKey(object, key) {
-  // non-destructive update
-  
+  // non-destructive delete
+  var newObject = Object.assign({}, object);
+  delete newObject[key];
+  return newObject;
 }
 
-  describe('deleteFromObjectByKey(object, key)', function() {
-    it('deletes `key` from a clone of object and returns the new object (it is non-destructive)', function() {
-      var obj = { prop: 1 }
-      var newObj = deleteFromObjectByKey(obj, 'prop')
+function destructivelyDeleteFromObjectByKey(object, key) {
+  delete object[key];
+  return object;
+}
 
-      expect(newObj['prop']).toBe(undefined)
-    })
-
-    it('does not modify the original object (it is non-destructive)', function() {
-      var obj = { prop: 1 }
-
-      deleteFromObjectByKey(obj, 'prop')
-      expect(obj['prop']).toBe(1)
-    })
-  })
 
   describe('destructivelyDeleteFromObjectByKey(object, key)', function() {
     it('returns object without the delete key/value pair', function() {
